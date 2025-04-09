@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->enum('type', ['like', 'comment', 'reply']);
+            $table->text('message');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }
